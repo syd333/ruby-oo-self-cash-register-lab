@@ -11,24 +11,25 @@ def initialize(discount=0)
     @new_array = []
 
 def add_item(title, price, quantity=1)
-  cart = {}
-  cart[:title] = title
-  cart[:price] = price
-  cart[:quantity] = quantity
+#   cart = {}
+#   cart[:title] = title
+#   cart[:price] = price
+#   cart[:quantity] = quantity
+    @price = price
+    @title = title
+    @quantity = quantity
+    quantity > 1 ? self.total += quantity * price : self.total += price
     
-  @cart << cart 
-  @total += price * quantity
-  @price = price
 
   quantity.times{ @new_array << title}
 end
 
 def apply_discount
-  if discount == 0
+  if self.discount == 0
     return "There is no discount to apply."
   else 
-    @total -= @total * discount / 100
-    return "After the discount, the total comes to $#{@total}."
+    self.total -= self.total * discount / 100
+    return "After the discount, the total comes to $#{self.total.to_i}."
   end
 end
 
@@ -38,8 +39,7 @@ end
 end
 
 def void_last_transaction
-@total -= @price
-@total 
+self.total -= @price * @quantity
 end
 
 end
